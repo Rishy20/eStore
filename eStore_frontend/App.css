@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins",sans-serif;;
+    font-weight: 400;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+:root{
+    --blue:#06163A;
+    --red:#D40707;
+    --lightGrey:#F8F8FB;
+}
+.main{
+    padding-top: 90px;
+}
+.MuiGrid-grid-md-12{
+    text-align: center;
+}
+.payment-body .MuiGrid-grid-md-12{
+    text-align: left;
+}
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+    padding: 8px 15px !important;
+}

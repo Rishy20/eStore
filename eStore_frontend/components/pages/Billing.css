@@ -1,0 +1,29 @@
+.billing-container{
+    width: 1000px;
+    margin:80px auto 100px;
+
+}
+.billing-title, .payment-title{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.payment-total{
+    font-size: 22px;
+    padding: 10px 0px;
+}
+.payment-total-text{
+    font-weight: 600;
+    padding-right: 10px;
+}
+.payment-total-amount{
+    font-weight: 600;
+    color: var(--red);
+}
+.payment-error{
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    padding: 1rem 1rem;
+    border-radius: .25rem;
+    font-size: 14px;
+}

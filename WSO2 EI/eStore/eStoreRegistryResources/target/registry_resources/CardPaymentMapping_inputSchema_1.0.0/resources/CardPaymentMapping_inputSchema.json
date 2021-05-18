@@ -1,0 +1,107 @@
+{
+  "$schema" : "http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#",
+  "inputType" : "JSON",
+  "id" : "http://wso2jsonschema.org",
+  "title" : "root",
+  "type" : "object",
+  "properties" : {
+    "address1" : {
+      "id" : "http://wso2jsonschema.org/address1",
+      "type" : "string"
+    },
+    "address2" : {
+      "id" : "http://wso2jsonschema.org/address2",
+      "type" : "string"
+    },
+    "chname" : {
+      "id" : "http://wso2jsonschema.org/chname",
+      "type" : "string"
+    },
+    "city" : {
+      "id" : "http://wso2jsonschema.org/city",
+      "type" : "string"
+    },
+    "cnum" : {
+      "id" : "http://wso2jsonschema.org/cnum",
+      "type" : "string"
+    },
+    "contact" : {
+      "id" : "http://wso2jsonschema.org/contact",
+      "type" : "string"
+    },
+    "country" : {
+      "id" : "http://wso2jsonschema.org/country",
+      "type" : "string"
+    },
+    "cvc" : {
+      "id" : "http://wso2jsonschema.org/cvc",
+      "type" : "string"
+    },
+    "deliverytype" : {
+      "id" : "http://wso2jsonschema.org/deliverytype",
+      "type" : "string"
+    },
+    "email" : {
+      "id" : "http://wso2jsonschema.org/email",
+      "type" : "string"
+    },
+    "expiry" : {
+      "id" : "http://wso2jsonschema.org/expiry",
+      "type" : "string"
+    },
+    "fname" : {
+      "id" : "http://wso2jsonschema.org/fname",
+      "type" : "string"
+    },
+    "lname" : {
+      "id" : "http://wso2jsonschema.org/lname",
+      "type" : "string"
+    },
+    "paymenttype" : {
+      "id" : "http://wso2jsonschema.org/paymenttype",
+      "type" : "string"
+    },
+    "state" : {
+      "id" : "http://wso2jsonschema.org/state",
+      "type" : "string"
+    },
+    "total" : {
+      "id" : "http://wso2jsonschema.org/total",
+      "type" : "number"
+    },
+    "zipcode" : {
+      "id" : "http://wso2jsonschema.org/zipcode",
+      "type" : "string"
+    },
+    "products" : {
+      "id" : "http://wso2jsonschema.org/products",
+      "type" : "array",
+      "items" : [ {
+        "id" : "http://wso2jsonschema.org/products/0",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "id" : "http://wso2jsonschema.org/products/0/id",
+            "type" : "number"
+          },
+          "name" : {
+            "id" : "http://wso2jsonschema.org/products/0/name",
+            "type" : "string"
+          },
+          "price" : {
+            "id" : "http://wso2jsonschema.org/products/0/price",
+            "type" : "number"
+          },
+          "img" : {
+            "id" : "http://wso2jsonschema.org/products/0/img",
+            "type" : "string"
+          },
+          "qty" : {
+            "id" : "http://wso2jsonschema.org/products/0/qty",
+            "type" : "number"
+          }
+        }
+      } ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+.progress{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+.progress-detail{
+    text-align: center;
+    width: 45px;
+}
+.progress-number{
+    padding: 8px 16px;
+    background-color: #666;
+    display: inline-block;
+    color: white;
+    font-weight: 800;
+
+}
+.progress-name{
+    font-size: 14px;
+    margin-left: -8px;
+}
+.progress-bar{
+    height: 5px;
+    width: 100%;
+    background-color: black;
+    border: none;
+    margin-top: 20px;
+}
+
+.ml-20{
+    margin-left: -20px;
+    font-size: 14px;
+}
+.none{
+    display: none;
+}
+.selected{
+    background-color: var(--red);
+}
+.progress-item{
+    display: contents;
+}

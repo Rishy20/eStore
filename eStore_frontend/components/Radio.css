@@ -1,0 +1,29 @@
+.form-label-radio{
+    margin-bottom: .5rem;
+    font-size: 16px;
+    display: inline-block;
+    padding-right: 20px;
+    font-weight: 600;
+}
+.radio-group{
+    display: inline-block !important;
+}
+.radio-group .MuiFormGroup-row {
+    flex-direction: row;
+    display: inline-block;
+}
+.radio-group .MuiTypography-body1 {
+    font-size: 18px;
+}
+.MuiRadio-colorPrimary.Mui-checked {
+    color: var(--red) !important;
+}
+.radio-group .MuiSvgIcon-root {
+    width: 0.9em;
+}
+.user-register .radio-group{
+    margin-bottom: 20px;
+}
+.payment-body .radio-group .MuiTypography-body1 {
+    font-size: 16px;
+}

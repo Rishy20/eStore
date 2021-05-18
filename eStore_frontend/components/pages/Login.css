@@ -1,0 +1,26 @@
+.user-login-body{
+    width: 35%;
+    padding: 50px;
+    margin-left: 55%;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+
+}
+.user-login{
+    display: flex;
+}
+.login-form{
+    margin-top: 30px;
+}
+.login-form div{
+    margin-bottom: 30px;
+}
+.login-error{
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    padding: 1rem 1rem;
+    border-radius: .25rem;
+    font-size: 14px;
+}

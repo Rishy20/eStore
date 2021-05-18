@@ -1,0 +1,16 @@
+map_S_root_S_root = function(){ 
+var outputroot={};
+
+outputroot =  {};
+outputroot.chname = inputroot.chname;
+outputroot.cnum = inputroot.cnum;
+outputroot.cvc = inputroot.cvc;
+outputroot.expiry = inputroot.expiry;
+outputroot.total = inputroot.total;
+return outputroot;
+};
+
+
+
+
+

@@ -1,0 +1,30 @@
+.side-img{
+    background-image: linear-gradient(#93291E,var(--red),var(--red), #93291E);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 45%;
+    background-position: center;
+    position: fixed;
+}
+.store-name-container{
+    color: white;
+    font-weight: 800;
+    font-size: 90px;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-60px);
+}
+.store-name-container .store-name{
+    padding-left: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.store-name-container .copyright{
+    font-size: 20px;
+
+}
+.store-name-container .store-icon{
+    width: 100px;
+}

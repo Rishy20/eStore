@@ -1,0 +1,11 @@
+.user-register-body{
+    width: 55%;
+    padding: 50px;
+    margin-left: 46%;
+}
+.user-register{
+    display: flex;
+}
+.register-form{
+    margin-top: 30px;
+}

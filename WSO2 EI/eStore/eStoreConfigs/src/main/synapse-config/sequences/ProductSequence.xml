@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProductSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="Request log" level="custom">
+        <property name="Message" value="Routing to product Service New"/>
+    </log>
+    <call>
+        <endpoint key="Products"/>
+    </call>
+    <respond/>
+</sequence>

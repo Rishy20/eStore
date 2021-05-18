@@ -1,0 +1,16 @@
+map_S_root_S_root = function(){ 
+var outputroot={};
+
+outputroot =  {};
+outputroot.chname = inputroot.payment.chname;
+outputroot.cnum = inputroot.payment.cnum;
+outputroot.cvc = inputroot.payment.cvc;
+outputroot.expiry = inputroot.payment.expiry;
+outputroot.total = inputroot.payment.total;
+return outputroot;
+};
+
+
+
+
+

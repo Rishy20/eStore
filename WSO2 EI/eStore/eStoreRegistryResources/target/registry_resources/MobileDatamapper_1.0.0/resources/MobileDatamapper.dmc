@@ -1,0 +1,14 @@
+map_S_root_S_root = function(){ 
+var outputroot={};
+
+outputroot =  {};
+outputroot.mobile = inputroot.payment.mobile;
+outputroot.pincode = inputroot.payment.pincode;
+outputroot.mobilesp = inputroot.payment.mobilesp;
+outputroot.total = inputroot.payment.total;
+return outputroot;
+};
+
+
+
+

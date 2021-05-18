@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/estore" name="eStoreAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="DELETE POST PUT GET">
+        <inSequence>
+            <property expression="get-property('query.param.service')" name="ServiceType" scope="default" type="STRING"/>
+            <switch source="$ctx:ServiceType">
+                <case regex="products">
+                    <log description="Request log" level="custom">
+                        <property name="Message" value="Routing to product Service "/>
+                    </log>
+                    <call>
+                        <endpoint key="Products"/>
+                    </call>
+                </case>
+                <case regex="login">
+                    <log description="Request log" level="custom">
+                        <property name="Message" value="Routing to Login Service"/>
+                    </log>
+                    <call>
+                        <endpoint key="Login"/>
+                    </call>
+                </case>
+                <case regex="orders">
+                    <log description="Request log" level="custom">
+                        <property name="Message" value="Routing to Order Service"/>
+                    </log>
+                    <call>
+                        <endpoint key="Orders"/>
+                    </call>
+                </case>
+                <case regex="register">
+                    <property description="getUserType" expression="json-eval($.accType)" name="UserType" scope="default" type="STRING"/>
+                    <switch source="get-property('UserType')">
+                        <case regex="Personal Account">
+                            <log description="Buyer Log" level="custom" separator=",">
+                                <property expression="fn:concat('Routing to ', get-property('UserType'))" name="message"/>
+                            </log>
+                            <call>
+                                <endpoint key="Buyer"/>
+                            </call>
+                        </case>
+                        <case regex="Seller Account">
+                            <log description="Seller Log" level="custom" separator=",">
+                                <property expression="fn:concat('Routing to ', get-property('UserType'))" name="message"/>
+                            </log>
+                            <call>
+                                <endpoint key="Seller"/>
+                            </call>
+                        </case>
+                        <default>
+                            <log description="Fault Log" level="custom">
+                                <property expression="fn:concat('Invalid User - ', get-property('UserType'))" name="message"/>
+                            </log>
+                        </default>
+                    </switch>
+                </case>
+                <case regex="checkout">
+                    <property description="getPaymentType" expression="json-eval($.payment.paymenttype)" name="PaymentType" scope="default" type="STRING"/>
+                    <property description="Get Delivery Details" expression="json-eval($.delivery)" name="deliveryDetails" scope="default" type="STRING"/>
+                    <property description="Get Product Details" expression="json-eval($.products)" name="productDetails" scope="default" type="STRING"/>
+                    <property description="Get Total" expression="json-eval($.payment.total)" name="total" scope="default" type="STRING"/>
+                    <switch source="get-property('PaymentType')">
+                        <case regex="Card">
+                            <log description="CardPayment" level="custom">
+                                <property expression="fn:concat('Routing to ', get-property('PaymentType'))" name="cardPayment"/>
+                            </log>
+                            <datamapper config="gov:datamapper/CardDataMapConfig.dmc" description="card data" inputSchema="gov:datamapper/CardDataMapConfig_inputSchema.json" inputType="JSON" outputSchema="gov:datamapper/CardDataMapConfig_outputSchema.json" outputType="JSON" xsltStyleSheet="gov:datamapper/CardDataMapConfig_xsltStyleSheet.xml"/>
+                            <header name="x-api-key" scope="transport" value="ffd22t7434bf39xh@jhjk#$JKb45&amp;*nkdldcvv"/>
+                            <call>
+                                <endpoint key="CardPayment"/>
+                            </call>
+                        </case>
+                        <case regex="Mobile">
+                            <log description="MobilePayment" level="custom">
+                                <property expression="fn:concat('Routing to ', get-property('PaymentType'))" name="mobilePayment"/>
+                            </log>
+                            <datamapper config="gov:datamapper/MobileDatamapper.dmc" description="Mobile Data Mapper" inputSchema="gov:datamapper/MobileDatamapper_inputSchema.json" inputType="JSON" outputSchema="gov:datamapper/MobileDatamapper_outputSchema.json" outputType="JSON" xsltStyleSheet="gov:datamapper/MobileDatamapper_xsltStyleSheet.xml"/>
+                            <header name="x-api-key" scope="transport" value="ffd22t7434bf39xh@jhjk#$JKb45&amp;*nkdldcvv"/>
+                            <call>
+                                <endpoint key="MobilePayment"/>
+                            </call>
+                        </case>
+                        <default>
+                            <log description="Fault Logo" level="custom">
+                                <property expression="fn:concat('Invalid Payment Type - ', get-property('PaymentType'))" name="message"/>
+                            </log>
+                            <respond/>
+                        </default>
+                    </switch>
+                    <property description="Get Payment Status" expression="json-eval($.status)" name="PaymentStatus" scope="default" type="STRING"/>
+                    <switch source="get-property('PaymentStatus')">
+                        <case regex="Success">
+                            <property description="Get Payment Id" expression="json-eval($.paymentId)" name="paymentId" scope="default" type="STRING"/>
+                            <payloadFactory media-type="json">
+                                <format>{&#xd;
+	"delivery":$1&#xd;
+}</format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:deliveryDetails"/>
+                                </args>
+                            </payloadFactory>
+                            <header name="x-api-key" scope="transport" value="ffd22t7434bf39xh@jhjk#$JKb45&amp;*nkdldcvv"/>
+                            <call>
+                                <endpoint key="Delivery"/>
+                            </call>
+                            <property description="Get Delivery Status" expression="json-eval($.status)" name="DeliveryStatus" scope="default" type="STRING"/>
+                            <switch source="get-property('DeliveryStatus')">
+                                <case regex="Success">
+                                    <log description="Delivery Request Success" level="custom">
+                                        <property name="Deliver Success" value="Deliver Service Success"/>
+                                    </log>
+                                    <property description="Get Delivery Id" expression="json-eval($.deliveryId)" name="deliveryId" scope="default" type="STRING"/>
+                                    <payloadFactory media-type="json">
+                                        <format>{&#xd;
+"paymentId":"$1",&#xd;
+"customer":$2,&#xd;
+"products":$3,&#xd;
+"total":$4,&#xd;
+"deliveryId":"$5"&#xd;
+}</format>
+                                        <args>
+                                            <arg evaluator="xml" expression="$ctx:paymentId"/>
+                                            <arg evaluator="xml" expression="$ctx:deliveryDetails"/>
+                                            <arg evaluator="xml" expression="$ctx:productDetails"/>
+                                            <arg evaluator="xml" expression="$ctx:total"/>
+                                            <arg evaluator="xml" expression="$ctx:deliveryId"/>
+                                        </args>
+                                    </payloadFactory>
+                                    <call>
+                                        <endpoint key="Orders"/>
+                                    </call>
+                                </case>
+                                <default>
+                                    <property description="Get Delivery Failure message" expression="json-eval($.message)" name="DeliverFailMessage" scope="default" type="STRING"/>
+                                    <log description="Delivery fault" level="custom" separator=",">
+                                        <property name="Deliver Fail" value="Deliver Service Failed"/>
+                                    </log>
+                                </default>
+                            </switch>
+                        </case>
+                        <default>
+                            <property description="Get Payment Failure message" expression="json-eval($.message)" name="PaymentFailMessage" scope="default" type="STRING"/>
+                            <log description="Payment fault" level="custom" separator=",">
+                                <property name="Payment Fail" value="Payment Failed"/>
+                            </log>
+                        </default>
+                    </switch>
+                </case>
+                <default>
+                    <log description="Request log" level="custom">
+                        <property name="Message" value="Default log"/>
+                    </log>
+                </default>
+            </switch>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="OPTIONS" uri-template="/*">
+        <inSequence>
+            <property name="Access-Control-Request-Headers" scope="transport" type="STRING" value="authorization,content-type"/>
+            <property name="Access-Control-Allow-Methods" scope="transport" type="STRING" value="GET,POST,PUT,DELETE,OPTIONS"/>
+            <property name="Access-Control-Allow-Headers" scope="transport" type="STRING" value="*"/>
+            <property name="Access-Control-Allow-Origin" scope="transport" type="STRING" value="*"/>
+            <property name="RESPONSE" scope="default" type="STRING" value="true"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

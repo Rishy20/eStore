@@ -1,0 +1,46 @@
+.header{
+    height: 90px;
+    background-color: white;
+    padding: 20px 15px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 10%);
+}
+.header-title{
+    color: black;
+    font-size: 40px;
+    /*text-transform: uppercase;*/
+    font-weight: 700;
+    padding: 3px 20px;
+    display: inline-block;
+    font-family: sans-serif;
+
+}
+.header-title::first-letter{
+    color: var(--red);
+}
+
+.header .search-bar{
+    margin-top: 7px;
+    width: 55%;
+}
+.login-links{
+    padding: 15px 10px;
+    display: flex;
+    cursor: pointer;
+}
+.header-link{
+    font-size:16px;
+    padding:0px 25px;
+    font-weight:600;
+}
+.header-link:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+.cart-icon{
+    font-size: 22px;
+}
